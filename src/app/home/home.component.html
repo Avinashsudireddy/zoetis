@@ -1,0 +1,292 @@
+
+<div class="container">
+    <div class="py-5 text-center">
+      <h2>Provision Resource</h2>
+    </div>
+  
+    <div class="row g-3">
+      <form [formGroup]="resourceForm" novalidate>
+  
+        <div class="col-md-12 col-lg-8 mx-auto">
+          <p class="mandatory">All fields are mandatory.</p>
+          <div class="row g-3">
+            <div class="col-6 form-group">
+              <label for="username">Username</label>
+              <input type="text" formControlName="userName" class="form-control" id="username" placeholder="Username"
+                required>
+              <div class="invalid-element" *ngIf="f.userName.invalid && f.userName.touched">
+                Username is required.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="email">Email</label>
+              <input type="email" formControlName="email" class="form-control" id="email" placeholder="you@example.com">
+              <div class="invalid-element" *ngIf="f.email.invalid && f.email.touched">
+                Please enter a valid email address.
+              </div>
+            </div>
+  
+            <div class="col-12 form-group">
+              <label for="projectName">Project Name</label>
+              <input type="text" formControlName="projectName" class="form-control" id="projectName" placeholder=""
+                required>
+              <div class="invalid-element" *ngIf="f.projectName.invalid && f.projectName.touched">
+                Project Name is required!
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="deploymentEnvironment">Deployment Environment</label>
+              <select formControlName="deploymentEnvironment" class="form-control" id="deploymentEnvironment">
+                <option>Azure</option>
+                <option>AWS</option>
+                <option>VMWare</option>
+              </select>
+              <div class="invalid-element" *ngIf="f.deploymentEnvironment.invalid && f.deploymentEnvironment.touched">
+                Deployment Environment is required.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="environment">Environment</label>
+              <select class="form-control" formControlName="environment" id="environment">
+                <option>Zoetis</option>
+              </select>
+              <div class="invalid-element" *ngIf="f.environment.invalid && f.environment.touched">
+                Please select a valid environment value.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="subscription">Subscription</label>
+              <select class="form-control" formControlName="subscription" id="subscription">
+                <option>Zoetis DEV</option>
+                <option>Zoetis QA</option>
+                <option>Zoetis PROD</option>
+                <option>Zoetis CORE</option>
+              </select>
+              <div class="invalid-element" *ngIf="f.subscription.invalid && f.subscription.touched">
+                Please select a valid subscription value.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="location">Location</label>
+              <select class="form-control" formControlName="location" id="location">
+                <option>eastus2</option>
+                <option>westus2</option>
+              </select>
+              <div class="invalid-element" *ngIf="f.location.invalid && f.location.touched">
+                Please select a valid location.
+              </div>
+            </div>
+  
+            <div class="col-12 form-group">
+              <label for="applicationName">Application Name</label>
+              <input type="text" formControlName="applicationName" class="form-control" id="applicationName"
+                placeholder="" required>
+              <div class="invalid-element" *ngIf="f.applicationName.invalid && f.applicationName.touched">
+                Application name is required.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="tier">Tier</label>
+              <select class="form-control" formControlName="tier" id="tier">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+              <div class="invalid-element" *ngIf="f.tier.invalid && f.tier.touched">
+                Please select a valid tier value.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="owner">Owner</label>
+              <input type="text" formControlName="owner" class="form-control" id="owner" placeholder="" required>
+              <div class="invalid-element" *ngIf="f.owner.invalid && f.owner.touched">
+                Owner is required.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="deptt">Deptt.</label>
+              <input type="text" formControlName="deptt" class="form-control" id="deptt" placeholder="" required>
+              <div class="invalid-element" *ngIf="f.deptt.invalid && f.deptt.touched">
+                Deptt is required.
+              </div>
+            </div>
+  
+            <div class="col-6 form-group">
+              <label for="sub-deptt">Sub-Deptt.</label>
+              <input type="text" formControlName="subDeptt" class="form-control" id="sub-deptt" placeholder="" required>
+              <div class="invalid-element" *ngIf="f.subDeptt.invalid && f.subDeptt.touched">
+                Sub Deptt. is required.
+              </div>
+            </div>
+  
+            <div class="form-signin">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            </div>
+  
+            <div class="divider"></div>
+  
+            <div class="col-6" formGroupName="vmValues">
+              <div class="col form-group">
+                <label for="sub-deptt">Resource Group</label>
+  
+                <div class="form-check">
+                  <input class="form-check-input"  ([ngModel])=resourceGroup formControlName="resourceGroup" type="radio" name="resourceGroup"
+                    id="resourceGroup1" value="yes" (click)=res() checked >
+                  <label class="form-check-label" for="resourceGroup1">
+                    Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" ([ngModel])=resourceGroup formControlName="resourceGroup" type="radio" name="resourceGroup"
+                    id="resourceGroup2" value="no" (click)=res()>
+                  <label class="form-check-label" for="resourceGroup2">
+                    No {{resourceGroup}}
+                  </label>
+                </div>
+                <div class="invalid-element"
+                  *ngIf="vmValues.controls.resourceGroup.invalid && vmValues.controls.resourceGroup.touched">
+                  Resource Group is required.
+                </div>
+              </div>
+  
+              <div class="col form-group" *ngIf="resourceGroup == 'yes'" >
+                <label for="vmResourceGroupType">Resource Group Type</label>
+                <select class="form-control" formControlName="vmResourceGroupType" name="vmResourceGroupType" id="vmResourceGroupType">
+                  <option>standard</option>
+                  <option>web</option>
+                  <option>db</option>
+                </select>
+                <div class="invalid-element"
+                  *ngIf="vmValues.controls.vmResourceGroupType.invalid && vmValues.controls.vmResourceGroupType.touched">
+                  Resource Group Type is required.
+                </div>
+              </div>
+  
+              <div class="col form-group" *ngIf="resourceGroup == 'yes'" >
+                <label for="vmResourceTemplate">Select Resource Template for Provisioning</label>
+                <select class="form-control" formControlName="vmResourceTemplate" id="vmResourceTemplate">
+                  <option>VM</option>
+                  <option>SQL Server</option>
+  
+                </select>
+                <div class="invalid-element"
+                  *ngIf="vmValues.controls.vmResourceTemplate.invalid && vmValues.controls.vmResourceTemplate.touched">
+                  Resource Template is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="vmUsageDescription">VM Usage Description</label>
+                <textarea class="form-control" formControlName="usageDescription" id="vmUsageDescription"
+                  placeholder="Add string less than 255 chars" required></textarea>
+                <div class="invalid-element"
+                  *ngIf="vmValues.controls.usageDescription.invalid && vmValues.controls.usageDescription.touched">
+                  Usage Description is required.
+                </div>
+              </div>
+  
+            </div>
+  
+            <div class="col" formGroupName="sqlValues">
+              <div class="divider"></div>
+  
+              <div class="col form-group">
+                <label for="sub-deptt">Want to provision more resources</label>
+  
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="provisionMore" type="radio" name="provisionMore"
+                    id="moreResources1" value="yes" checked>
+                  <label class="form-check-label" for="moreResources1">
+                    Yes
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="provisionMore" type="radio" name="provisionMore"
+                    id="moreResources2" value="no">
+                  <label class="form-check-label" for="moreResources2">
+                    No
+                  </label>
+                </div>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.provisionMore.invalid && sqlValues.controls.provisionMore.touched">
+                  Provision More is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="existingResource">Existing Resource Group</label>
+                <select class="form-control" formControlName="existingResourceGroup" id="existingResource">
+                  <option>same as Primary</option>
+                </select>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.existingResourceGroup.invalid && sqlValues.controls.existingResourceGroup.touched">
+                  Existing ResourceGroup is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="sqlResourceGroupType">Resource Group Type</label>
+                <select class="form-control" formControlName="sqlResourceGroupType" id="sqlResourceGroupType">
+                  <option>standard</option>
+                  <option>web</option>
+                  <option>db</option>
+                </select>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.sqlResourceGroupType.invalid && sqlValues.controls.sqlResourceGroupType.touched">
+                  Resource GroupType is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="sqlResourceTemplate">Select Resource Template for Provisioning</label>
+                <select class="form-control" formControlName="sqlResourceTemplate" id="sqlResourceTemplate">
+                  <option>VM</option>
+                  <option>SQL Server</option>
+                </select>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.sqlResourceTemplate.invalid && sqlValues.controls.sqlResourceTemplate.touched">
+                  Resource Template is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="dbCounts">Counts of DB for SQL Server</label>
+                <select class="form-control" formControlName="dbCounts" id="resourcetemplate">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.dbCounts.invalid && sqlValues.controls.dbCounts.touched">
+                  DbCounts is required.
+                </div>
+              </div>
+  
+              <div class="col form-group">
+                <label for="dbDescription">DB Description DB1</label>
+                <textarea class="form-control" formControlName="dbDescription" id="dbDescription"
+                  placeholder="Add string less than 255 chars" required></textarea>
+                <div class="invalid-element"
+                  *ngIf="sqlValues.controls.dbDescription.invalid && sqlValues.controls.dbDescription.touched">
+                  Db Description is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-signin">
+              <button class="btn btn-lg btn-primary btn-block" [disabled]="!resourceForm.valid"(click)="confirm()"
+                type="submit">Continue</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

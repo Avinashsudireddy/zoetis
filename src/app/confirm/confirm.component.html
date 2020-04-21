@@ -1,0 +1,26 @@
+<div class="container">
+    <div>
+        <h4 class="float-left">Please review before submitting : </h4>
+      
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let key of keys">
+                <th scope="row">{{labels[key]}}</th>
+                <td>{{resourceData[key]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+    <button type="button" class="btn btn-lg btn-primary btn-block subit-button col-3 mx-auto" (click)="goHome()">Edit</button>"
+    <button class="btn btn-lg btn-primary btn-block subit-button col-3 mx-auto" (click)="saveData()"
+        type="submit">Submit</button>
+    </div>
+</div>
